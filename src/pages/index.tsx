@@ -13,9 +13,11 @@ import Link from "next/link"
 // }
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  //const data = await fetch('http://153.126.185.116:18080/api/home/api/home')
-  const data = makeDummyHome()
-  console.log(data)
+  const data = await fetch('http://153.126.185.116:18080/api/home').then(res => {
+    return res.text()
+  })
+  //const data = makeDummyHome()
+  console.log("aaaaaaa:",data)
   return{
     props: {data},
   }
