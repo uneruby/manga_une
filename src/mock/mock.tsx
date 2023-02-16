@@ -1,4 +1,13 @@
 import { Proto } from "api/protocol"
+import { NumericLiteral } from "typescript"
+
+export const makeDummyChapter = (id:number): Proto.IChapter => {
+    return{
+        id: id,
+        name: "Chapter_" + id,
+        thumbnailUrl: "https://placehold.jp/640x360.png?text=Chapter_" + id,
+    }
+}
 
 export const makeDummyTitle = (id: number): Proto.ITitle => {
     console.log("Dummy")
@@ -6,7 +15,7 @@ export const makeDummyTitle = (id: number): Proto.ITitle => {
         id: id,
         name: "Title_" + id,
         description: "ローラはオーストリアのシュタイアーマルクという自然豊かな土地で、幼い頃に母を亡くし、父と城に暮らしていた。",
-        thumbnailUrl: "https://placehold.jp/640x360.png?text=" + id,
+        thumbnailUrl: "https://placehold.jp/640x360.png?text=Title_" + id,
         likeCount: '1260'
     }
 }
@@ -33,9 +42,24 @@ export const makeDummySearchView = (word: string): Proto.ISearchView => {
     }
 }
 
-export const makeDummyHome = () :Proto.IHomeView => {
+export const makeDummyHomeView = (): Proto.IHomeView => {
     console.log("DummyHome")
     return {
         titlesByTag: [1,2,3,4,5].map(v => makeTitleByTag(v))
     }
 }
+
+export const makeDummyDetailView = (id: number): Proto.ITitleDetailView => {
+    return {
+        title: makeDummyTitle(id),
+        chapters: [1,2,3].map(v => makeDummyChapter(v))
+    }
+}
+
+export const makeDummyViewerView = (id: number): Proto.IViewerView => {
+    return{
+        chapter: makeDummyChapter(id),
+        imageUrls: [].map(v => "https://placehold.jp/640x360.png?text=Page_" +id),
+    }
+}
+
