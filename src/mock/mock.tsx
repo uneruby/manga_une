@@ -59,7 +59,7 @@ export const makeDummyDetailView = (id: number): Proto.ITitleDetailView => {
 export const makeDummyViewerView = (id: number): Proto.IViewerView => {
     return{
         chapter: makeDummyChapter(id),
-        imageUrls: [].map(v => "https://placehold.jp/640x360.png?text=Page_" +id),
+        imageUrls: [1,2,3,4,5,6,7,8,9,10].map(v => "https://placehold.jp/640x360.png?text=Page_" +v),
     }
 }
 

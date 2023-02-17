@@ -7,41 +7,12 @@ import { SearchBar } from "../components/SearchBar"
 
 export const getStaticProps: GetStaticProps = async (context) => {
 
+  //const apiEndPoint = 'http://153.126.185.116:18080/api/home?format=json'
   const response = await fetch('http://153.126.185.116:18080/api/home?format=json')
-  const test = await response.json()
-  console.log('---------------------------------------')
-  console.log(response)
-  console.log('---------------------------------------')
-
-  const failed = await fetch('http://153.126.185.116:18080/api/home?format=json').then(res => {
-    const data = res.json()
-    console.log('---------------------------------------')
-    console.log(data)
-    console.log('---------------------------------------')
-
-    return data
-  }
-  )
-
-  console.log('---------------------------------------')
-  console.log(failed)
-  console.log('---------------------------------------')
-
-
-  const data = await fetch('http://153.126.185.116:18080/api/home?format=json', { method: "GET" })
-    .then(res =>
-      res.json()
-      //return makeDummyHomeView()
-    ).then(data => {
-      console.log(data)
-      return data
-    })
-  //console.table(data.titlesByTag)
-  // const data = makeDummyHomeView()
-  console.log('---------------------------------------')
-
-  console.table(data)
-  console.log('---------------------------------------')
+  const data = await response.json()
+  // console.log('---------------------------------------')
+  // console.log(response)
+  // console.log('---------------------------------------')
 
   return {
     props: { data },
@@ -49,7 +20,21 @@ export const getStaticProps: GetStaticProps = async (context) => {
 }
 
 export default function Home(props: { data: Proto.IHomeView }) {
-  //console.log(props.data)
+  // console.log(props.data)
+  console.table(props)
+
+  // console.log('---------------------------------------')
+
+  // console.log(props.data.titlesByTag)
+  // console.log('---------------------------------------')
+
+  // console.log(props.data.titlesByTag.titles[0])
+  // console.log('---------------------------------------')
+
+  // console.log(props.data.titlesByTag.titles.likeCount)
+  // console.log('---------------------------------------')
+
+
   return (
     <div>
       <p>ホーム画面</p>
