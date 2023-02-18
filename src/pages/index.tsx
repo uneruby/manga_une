@@ -20,20 +20,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
 }
 
 export default function Home(props: { data: Proto.IHomeView }) {
-  // console.log(props.data)
-  console.table(props)
-
-  // console.log('---------------------------------------')
-
-  // console.log(props.data.titlesByTag)
-  // console.log('---------------------------------------')
-
-  // console.log(props.data.titlesByTag.titles[0])
-  // console.log('---------------------------------------')
-
-  // console.log(props.data.titlesByTag.titles.likeCount)
-  // console.log('---------------------------------------')
-
 
   return (
     <div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Proto } from "api/protocol"
 import { GetServerSideProps, GetStaticProps } from "next"
 import { makeDummySearchView } from "@/mock/mock";
@@ -6,8 +6,9 @@ import Link from "next/link";
 import { SearchBar } from "@/components/SearchBar";
 
 export const getServerSideProps: GetServerSideProps = async () => {
-    const searchText = "5"
-    const response = await fetch('http://153.126.185.116:18080/api/search?word='+searchText+'&format=json')
+
+    const searchWord = "5"
+    const response = await fetch('http://153.126.185.116:18080/api/search?word='+searchWord+'&format=json')
     const data = await response.json()
     //const data = makeDummySearchView("searchTitel")
     return {
@@ -16,6 +17,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
 }
 
 export default function SearchView(props: Proto.ISearchView) {
+    const [value,setValue] = useState("")
     return (
         <div>
             <p>検索結果</p>

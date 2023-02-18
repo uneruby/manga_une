@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Proto } from "api/protocol"
 import { GetServerSideProps,GetStaticProps } from "next"
 import { makeDummyDetailView, makeDummyViewerView } from "@/mock/mock";
@@ -18,7 +18,18 @@ export const getServerSideProps: GetServerSideProps = async(context) => {
 }
 
 export default function Detail(props: {data: Proto.IViewerView}) {
-    console.log(props)
+    //console.log(props)
+    const [pageNumber,setPageNumber] = useState(0)
+    const goNextPage = () => {
+        if(pageNumber+1 != props.data?.imageUrls?.length - 1){
+            setPageNumber(pageNumber + 2)
+        }
+    }
+    const backBeforePage = () => {
+        if(pageNumber != 0){
+            setPageNumber(pageNumber - 2)
+        }
+    }
     return (
         <div>
             <p>ビュワー</p>
@@ -26,12 +37,16 @@ export default function Detail(props: {data: Proto.IViewerView}) {
             <div>
                 <p>第{props.data?.chapter?.id}話 {props.data?.chapter?.name}</p>
                 <div>
+                    <img src={props.data?.imageUrls[pageNumber+1]} onClick={goNextPage} ></img>
+                    <img src={props.data?.imageUrls[pageNumber]} onClick={backBeforePage}></img>
+                </div>
+                {/* <div>
                     {props.data?.imageUrls?.map((v,index) => (
                         <div key={index}>
                             <img src={v}></img>
                         </div>
                     ))}
-                </div>
+                </div> */}
             </div>
         </div>
     )
