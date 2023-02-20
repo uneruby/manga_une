@@ -5,9 +5,9 @@ import { makeDummySearchView } from "@/mock/mock";
 import Link from "next/link";
 import { SearchBar } from "@/components/SearchBar";
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
 
-    const searchWord = "5"
+    const searchWord = context.query.word as string
     const response = await fetch('http://153.126.185.116:18080/api/search?word='+searchWord+'&format=json')
     const data = await response.json()
     //const data = makeDummySearchView("searchTitel")

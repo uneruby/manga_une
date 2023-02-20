@@ -6,7 +6,7 @@ import { Value } from "sass";
 export const SearchBar: React.FC = () => {
     const [searchText,setSearchText] = useState("")
     const search = () => {
-        router.push("/SearchView")
+        router.push("/SearchView?word="+searchText)
     }
 
     return(

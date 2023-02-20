@@ -4,9 +4,17 @@ import { GetServerSideProps,GetStaticProps } from "next"
 import { makeDummyDetailView, makeDummyViewerView } from "@/mock/mock";
 import Link from "next/link";
 import { SearchBar } from "@/components/SearchBar";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
+
+import { Navigation, Autoplay, Pagination, Scrollbar } from "swiper";
+import { reverse } from "dns";
 
 export const getServerSideProps: GetServerSideProps = async(context) => {
-    const chapterId = context.params.chapter_id
+    const chapterId = context.query.chapter_id
     console.log("chapterID: ", chapterId)
     const response = await fetch('http://153.126.185.116:18080/api/viewer?chapter_id='+chapterId+'&format=json')
     const data = await response.json()
@@ -30,23 +38,44 @@ export default function Detail(props: {data: Proto.IViewerView}) {
             setPageNumber(pageNumber - 2)
         }
     }
+    const jumpDetailView = () => {
+        history.back()
+    }
     return (
         <div>
             <p>ビュワー</p>
             <SearchBar/>
             <div>
-                <p>第{props.data?.chapter?.id}話 {props.data?.chapter?.name}</p>
+                {/* <p>第{props.data?.chapter?.id}話 {props.data?.chapter?.name}</p>
                 <div>
+                    {pageNumber+1 == props.data?.imageUrls?.length - 1 ?
+                        <button onClick={jumpDetailView}>作品詳細へ</button>
+                        :""    
+                    }
                     <img src={props.data?.imageUrls[pageNumber+1]} onClick={goNextPage} ></img>
                     <img src={props.data?.imageUrls[pageNumber]} onClick={backBeforePage}></img>
-                </div>
-                {/* <div>
-                    {props.data?.imageUrls?.map((v,index) => (
-                        <div key={index}>
-                            <img src={v}></img>
-                        </div>
-                    ))}
                 </div> */}
+                <div>
+                    <Swiper
+                        slidesPerView={2}
+                        slidesPerGroup={2}
+                        pagination={{
+                            clickable: true
+                        }}
+                        navigation={true}
+                        modules={[Pagination, Navigation,Scrollbar]}
+                        scrollbar={true}
+                        
+                        >
+                    {props.data?.imageUrls?.map((v,index) => (
+                        // <div key={index}>
+                            <SwiperSlide key={index}>
+                            <img src={v}></img>
+                            </SwiperSlide>
+                        // </div>
+                    ))}
+                    </Swiper>
+                </div>
             </div>
         </div>
     )
