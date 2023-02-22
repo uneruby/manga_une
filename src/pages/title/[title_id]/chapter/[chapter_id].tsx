@@ -13,6 +13,8 @@ import "swiper/css/scrollbar";
 import { Navigation, Autoplay, Pagination, Scrollbar } from "swiper";
 import { reverse } from "dns";
 
+import styles from "./chapter.module.scss"
+
 export const getServerSideProps: GetServerSideProps = async(context) => {
     const chapterId = context.query.chapter_id
     console.log("chapterID: ", chapterId)
@@ -42,40 +44,47 @@ export default function Detail(props: {data: Proto.IViewerView}) {
         history.back()
     }
     return (
-        <div>
-            <p>ビュワー</p>
-            <SearchBar/>
-            <div>
-                {/* <p>第{props.data?.chapter?.id}話 {props.data?.chapter?.name}</p>
-                <div>
-                    {pageNumber+1 == props.data?.imageUrls?.length - 1 ?
-                        <button onClick={jumpDetailView}>作品詳細へ</button>
-                        :""    
-                    }
-                    <img src={props.data?.imageUrls[pageNumber+1]} onClick={goNextPage} ></img>
-                    <img src={props.data?.imageUrls[pageNumber]} onClick={backBeforePage}></img>
-                </div> */}
-                <div>
-                    <Swiper
-                        slidesPerView={2}
-                        slidesPerGroup={2}
-                        pagination={{
-                            clickable: true
+        <div className={styles.Base}>
+            <p className={styles.PageName}>ビュワー</p>
+            <div className={styles.searchBar}>
+                <SearchBar/>
+            </div>
+            <p className={styles.chapterTitle}>
+                {/* 第{props.data?.chapter?.id}話  */}
+                {props.data?.chapter?.name}</p>
+            {/* <div>
+                {pageNumber+1 == props.data?.imageUrls?.length - 1 ?
+                    <button onClick={jumpDetailView}>作品詳細へ</button>
+                    :""    
+                }
+                <img src={props.data?.imageUrls[pageNumber+1]} onClick={goNextPage} ></img>
+                <img src={props.data?.imageUrls[pageNumber]} onClick={backBeforePage}></img>
+            </div> */}
+            <div >
+                <Swiper
+                    style={{
+                        "--swiper-navigation-color": "#fff",
+                        "--swiper-pagination-color": "#fff",
+                    }}
+                    slidesPerView={2}
+                    slidesPerGroup={2}
+                    dir="rtl"
+                    pagination={{
+                        type: "progressbar",
                         }}
-                        navigation={true}
-                        modules={[Pagination, Navigation,Scrollbar]}
-                        scrollbar={true}
-                        
-                        >
-                    {props.data?.imageUrls?.map((v,index) => (
-                        // <div key={index}>
-                            <SwiperSlide key={index}>
-                            <img src={v}></img>
-                            </SwiperSlide>
-                        // </div>
-                    ))}
-                    </Swiper>
-                </div>
+                    navigation={true}
+                    modules={[Pagination, Navigation,Scrollbar]}
+                    scrollbar={true}
+                    //centeredSlidesBounds={true}
+                    >
+                {props.data?.imageUrls?.map((v,index) => (
+                    // <div key={index}>
+                        <SwiperSlide key={index}>
+                        <img src={v}></img>
+                        </SwiperSlide>
+                    // </div>
+                ))}
+                </Swiper>
             </div>
         </div>
     )

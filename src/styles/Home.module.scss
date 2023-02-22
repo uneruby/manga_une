@@ -1,0 +1,43 @@
+.Home{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    //background-color: aliceblue;
+}
+.tag{
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.owntitle{
+    width: 100%;
+    margin-bottom: 70px;
+    //background-color: aliceblue;
+}
+.Link{
+    width: 100%;
+}
+.img{
+    width: 100%;
+}
+.likeCount{
+    width: 100%;
+}
+.description{
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.title{
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.recomendTitle{
+    width: 40%;
+}
+.recomendImg{
+    width: 100%;
+}

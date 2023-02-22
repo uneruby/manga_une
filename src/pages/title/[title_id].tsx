@@ -6,7 +6,7 @@ import Link from "next/link";
 import { SearchBar } from "@/components/SearchBar";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-    const titleId = context.params.title_id
+    const titleId = context.query.title_id
     console.log("titleID: ", titleId)
     const response = await fetch('http://153.126.185.116:18080/api/title/detail?title_id='+titleId+'&format=json')
     const data = await response.json()
